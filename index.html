@@ -11,6 +11,7 @@
 </head>
 <body class="container">
 
+    <!--This div holds the main body of the app, App header, the Add New Task button, and the Tasks subheader-->
     <div class="app">
         <h4 class="mb-3">TODO App</h4>
         <div id="addNew" data-bs-toggle="modal" data-bs-target="#form">
@@ -30,7 +31,7 @@
                     <div class="modal-body">
                         <p>Task Title</p>
                         <input class="form-control" type="text" name="" id="textInput">
-                        <div id="msg"></div>
+                        <div id="msg"></div> 
                         <br>
                         <p>Due Date</p>
                         <input class="form-control" type="date" name="" id="dateInput">
@@ -46,11 +47,13 @@
             </div>
         </form>
 
+        <!--This div holds the created task cards-->
         <div id="tasks">
             
         </div>
     </div>
 
+    <!--Scripts-->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="script.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>

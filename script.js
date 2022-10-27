@@ -1,3 +1,4 @@
+//Variables formed from elements in the DOM
 let form = document.getElementById("form");
 let textInput = document.getElementById("textInput");
 let msg = document.getElementById("msg");
@@ -6,21 +7,20 @@ let textarea = document.getElementById("textarea");
 let tasks = document.getElementById("tasks");
 let add = document.getElementById("add");
 
-//This prevents the user from adding a new task with an incomplete New Task modal.
+//This prevents the user from adding a new task with an incomplete Task Title field in the modal.
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     formValidation();
 });
 
-//This function validates if the New Task modal is filled out correctly.
-    //If if isn't in logs "failure" in the console and an error populates in the modal.
-    //If successful, it logs "success" and calls the acceptData() function.
+//This function validates if the Tast Title field in the modal is filled out.
+    //If if isn't, an error populates in the modal.
+    //If successful, it clears away the error message (if needed), runs the acceptData function,
+        //and allows the user to click the Add button to close.
 let formValidation = () => {
     if(textInput.value === "") {
-        console.log("failure");
         msg.innerHTML = "Task cannot be blank";
     } else {
-        console.log("success");
         msg.innerHTML = "";
         acceptData();
         add.setAttribute("data-bs-dismiss", "modal");
@@ -31,10 +31,11 @@ let formValidation = () => {
     }
 };
 
+//Empty data array
 let data = [];
 
-//This function takes the data that the user provided in the New Task modal, creates a data object, and activates the
-    //createTasks() function.
+//This function takes the data that the user provided in the New Task modal, creates a data object and
+    //pushes it into the data array, stores the data in local storage, and activates the createTasks() function.
 let acceptData = () => {
     data.push({
         text: textInput.value,
@@ -42,12 +43,11 @@ let acceptData = () => {
         description: textarea.value
     });
     localStorage.setItem("data", JSON.stringify(data));
-    
-    console.log(data);
     createTasks();
 };
 
-//This function creates a Task Card to show on the screen to the user.
+//This function creates a Task Card with data in the local storage to show on the screen to the user.
+    //Then runs resetForm function at the end.
 let createTasks = () => {
     tasks.innerHTML = "";
     data.map((x, y) => {
@@ -68,12 +68,15 @@ let createTasks = () => {
     resetForm();
 };
 
+//This function deletes a Task Card by pressing the Trash Can icon on a specific card.
+    //It also deletes the data in the local storage.
 let deleteTask = (e) => {
     e.parentElement.parentElement.remove();
     data.splice(e.parentElement.parentElement.id, 1);
     localStorage.setItem("data", JSON.stringify(data));
 };
 
+//This function edits a Task Card by pressing the Paper with Pencil icon on a specific card.
 let editTask = (e) => {
     let selectedTask = e.parentElement.parentElement;
     textInput.value = selectedTask.children[0].innerHTML;
@@ -90,6 +93,7 @@ let resetForm = () => {
     textarea.value = "";
 };
 
+//This function grabs the data in local storage and shows it on screen for the user.
 (() => {
     data = JSON.parse(localStorage.getItem("data")) || [];
     createTasks();
