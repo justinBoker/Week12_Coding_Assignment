@@ -4,22 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gradebook App</title>
+    <title>TODO App</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="container">
 
-    <!--This div holds the form for the user to create a new course-->
-    <div id="new-course" class="new-course-box">
-        <h2>New Course</h2>
-        <input type="text" id="new-course-name" class="form-control" placeholder="New Course"> <br>
-        <button id="create-new-course" class="btn btn-primary form-control">Create Course</button>
-    </div>
+    <div class="app">
+        <h4 class="mb-3">TODO App</h4>
+        <div id="addNew" data-bs-toggle="modal" data-bs-target="#form">
+            <span>Add New Task</span>
+            <i class="fas fa-plus"></i>
+        </div>
+        <h5 class="text-center my-3">Tasks</h5>
 
-    <!--This div will hold the courses where the user can add students and grades-->
-    <div id="app">
-        
+        <!-- Modal -->
+        <form class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Task</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Task Title</p>
+                        <input class="form-control" type="text" name="" id="textInput">
+                        <div id="msg"></div>
+                        <br>
+                        <p>Due Date</p>
+                        <input class="form-control" type="date" name="" id="dateInput">
+                        <br>
+                        <p>Description</p>
+                        <textarea class="form-control" name="" id="textarea" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="add" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div id="tasks">
+            
+        </div>
     </div>
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
